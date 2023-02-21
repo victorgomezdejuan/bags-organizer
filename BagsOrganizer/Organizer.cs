@@ -9,18 +9,17 @@ public class Organizer
         ["weapons"] = new string[] { "Axe", "Dagger", "Mace", "Sword" }
     };
 
-    private int itemCount;
-    private List<string> backpack;
-    private List<KeyValuePair<string, List<string>>> bags;
+    private List<Bag> bags;
 
     public Organizer()
     {
-        itemCount = 0;
-        backpack = new(8);
-        bags = new();
-
-        for (int i = 0; i < 4; i++)
-            bags.Add(new KeyValuePair<string, List<string>>(string.Empty, new List<string>(4)));
+        bags = new() {
+            new Bag(8), // backpack
+            new Bag(4),
+            new Bag(4),
+            new Bag(4),
+            new Bag(4)
+        };
     }
 
     public static string[] GetCategories()
@@ -34,29 +33,18 @@ public class Organizer
         if (!Items.SelectMany(c => c.Value).Contains(item))
             throw new NonExistingItemException();
 
-        if (itemCount < 8)
-            backpack.Add(item);
-        else {
-            if (itemCount < 12)
-                bags.ElementAt(0).Value.Add(item);
-            else {
-                if (itemCount < 16)
-                    bags.ElementAt(1).Value.Add(item);
-                else
-                    bags.ElementAt(2).Value.Add(item);
+        foreach(Bag bag in bags) {
+            if(bag.HasFreeSpace()) {
+                bag.AddItem(item);
+                break;
             }
                 
         }
-            
-
-        itemCount++;
     }
 
     public string[] GetBackpackItems()
-        => backpack.ToArray();
+        => bags[0].Items.ToArray();
 
     public string[] GetItemsOfBag(int bagIndex)
-    {
-        return bags.ElementAt(bagIndex).Value.ToArray();
-    }
+        => bags[bagIndex + 1].Items.ToArray();
 }
