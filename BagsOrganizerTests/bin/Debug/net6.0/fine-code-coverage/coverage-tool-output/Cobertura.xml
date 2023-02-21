@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.991379310344828" branch-rate="1" lines-covered="115" lines-valid="116" branches-covered="16" branches-valid="16" complexity="35" version="0" timestamp="1677000245">
+  <sources>
+    <source>D:\</source>
+  </sources>
+  <packages>
+    <package name="BagsOrganizer" line-rate="1" branch-rate="1" complexity="15">
+      <classes>
+        <class name="BagsOrganizer.Organizer" filename="D:\Training\Programming\TDD\BagsOrganizer\BagsOrganizer\Organizer.cs" line-rate="1" branch-rate="1" complexity="15">
+          <methods>
+            <method name="GetCategories" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="GetItemsOfCategory" signature="(...)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="30" hits="4" branch="false" />
+              </lines>
+            </method>
+            <method name="AddItem" signature="(...)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="33" hits="79" branch="false" />
+                <line number="34" hits="321" branch="true" condition-coverage="100% (2/2)" />
+                <line number="35" hits="1" branch="false" />
+                <line number="37" hits="78" branch="true" condition-coverage="100% (2/2)" />
+                <line number="38" hits="51" branch="false" />
+                <line number="39" hits="27" branch="false" />
+                <line number="40" hits="27" branch="true" condition-coverage="100% (2/2)" />
+                <line number="41" hits="17" branch="false" />
+                <line number="42" hits="10" branch="false" />
+                <line number="43" hits="10" branch="true" condition-coverage="100% (2/2)" />
+                <line number="44" hits="9" branch="false" />
+                <line number="46" hits="1" branch="false" />
+                <line number="47" hits="10" branch="false" />
+                <line number="49" hits="27" branch="false" />
+                <line number="52" hits="78" branch="false" />
+                <line number="53" hits="78" branch="false" />
+              </lines>
+            </method>
+            <method name="GetBackpackItems" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="56" hits="9" branch="false" />
+              </lines>
+            </method>
+            <method name="GetItemsOfBag" signature="(...)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="59" hits="9" branch="false" />
+                <line number="60" hits="9" branch="false" />
+                <line number="61" hits="9" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="16" hits="12" branch="false" />
+                <line number="17" hits="12" branch="false" />
+                <line number="18" hits="12" branch="false" />
+                <line number="19" hits="12" branch="false" />
+                <line number="20" hits="12" branch="false" />
+                <line number="22" hits="120" branch="true" condition-coverage="100% (2/2)" />
+                <line number="23" hits="48" branch="false" />
+                <line number="24" hits="12" branch="false" />
+              </lines>
+            </method>
+            <method name=".cctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="1" branch="false" />
+                <line number="6" hits="1" branch="false" />
+                <line number="7" hits="1" branch="false" />
+                <line number="8" hits="1" branch="false" />
+                <line number="9" hits="1" branch="false" />
+                <line number="10" hits="1" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="5" hits="1" branch="false" />
+            <line number="6" hits="1" branch="false" />
+            <line number="7" hits="1" branch="false" />
+            <line number="8" hits="1" branch="false" />
+            <line number="9" hits="1" branch="false" />
+            <line number="10" hits="1" branch="false" />
+            <line number="16" hits="12" branch="false" />
+            <line number="17" hits="12" branch="false" />
+            <line number="18" hits="12" branch="false" />
+            <line number="19" hits="12" branch="false" />
+            <line number="20" hits="12" branch="false" />
+            <line number="22" hits="120" branch="true" condition-coverage="100% (2/2)" />
+            <line number="23" hits="48" branch="false" />
+            <line number="24" hits="12" branch="false" />
+            <line number="27" hits="1" branch="false" />
+            <line number="30" hits="4" branch="false" />
+            <line number="33" hits="79" branch="false" />
+            <line number="34" hits="321" branch="true" condition-coverage="100% (2/2)" />
+            <line number="35" hits="1" branch="false" />
+            <line number="37" hits="78" branch="true" condition-coverage="100% (2/2)" />
+            <line number="38" hits="51" branch="false" />
+            <line number="39" hits="27" branch="false" />
+            <line number="40" hits="27" branch="true" condition-coverage="100% (2/2)" />
+            <line number="41" hits="17" branch="false" />
+            <line number="42" hits="10" branch="false" />
+            <line number="43" hits="10" branch="true" condition-coverage="100% (2/2)" />
+            <line number="44" hits="9" branch="false" />
+            <line number="46" hits="1" branch="false" />
+            <line number="47" hits="10" branch="false" />
+            <line number="49" hits="27" branch="false" />
+            <line number="52" hits="78" branch="false" />
+            <line number="53" hits="78" branch="false" />
+            <line number="56" hits="9" branch="false" />
+            <line number="59" hits="9" branch="false" />
+            <line number="60" hits="9" branch="false" />
+            <line number="61" hits="9" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="BagsOrganizerTests" line-rate="0.9875" branch-rate="1" complexity="20">
+      <classes>
+        <class name="AutoGeneratedProgram" filename="D:\nuget\microsoft.net.test.sdk\17.1.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="Main" signature="(...)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="BagsOrganizerTests.OrganizerTests" filename="D:\Training\Programming\TDD\BagsOrganizer\BagsOrganizerTests\OrganizerTests.cs" line-rate="1" branch-rate="1" complexity="19">
+          <methods>
+            <method name="Categories" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="CategoryItems" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="1" branch="false" />
+                <line number="19" hits="1" branch="false" />
+                <line number="20" hits="1" branch="false" />
+                <line number="21" hits="1" branch="false" />
+                <line number="22" hits="1" branch="false" />
+                <line number="23" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="EmptyBackPack" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddOneItemToBackpack" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="1" branch="false" />
+                <line number="32" hits="1" branch="false" />
+                <line number="33" hits="1" branch="false" />
+                <line number="34" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddTwoItemsToBackpack" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="38" hits="1" branch="false" />
+                <line number="39" hits="1" branch="false" />
+                <line number="40" hits="1" branch="false" />
+                <line number="41" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="FillUpBackpack" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="45" hits="1" branch="false" />
+                <line number="46" hits="1" branch="false" />
+                <line number="47" hits="1" branch="false" />
+                <line number="48" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddWrongItem" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="52" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name="AddOneItemToFirsttBag" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="57" hits="1" branch="false" />
+                <line number="58" hits="1" branch="false" />
+                <line number="59" hits="1" branch="false" />
+                <line number="60" hits="1" branch="false" />
+                <line number="61" hits="1" branch="false" />
+                <line number="62" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="FillUpFirstBag" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="66" hits="1" branch="false" />
+                <line number="67" hits="1" branch="false" />
+                <line number="68" hits="1" branch="false" />
+                <line number="69" hits="1" branch="false" />
+                <line number="70" hits="1" branch="false" />
+                <line number="71" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddOneItemToSecondBag" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="75" hits="1" branch="false" />
+                <line number="76" hits="1" branch="false" />
+                <line number="77" hits="1" branch="false" />
+                <line number="78" hits="1" branch="false" />
+                <line number="79" hits="1" branch="false" />
+                <line number="80" hits="1" branch="false" />
+                <line number="81" hits="1" branch="false" />
+                <line number="82" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="FillUpSecondBag" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="86" hits="1" branch="false" />
+                <line number="87" hits="1" branch="false" />
+                <line number="88" hits="1" branch="false" />
+                <line number="89" hits="1" branch="false" />
+                <line number="90" hits="1" branch="false" />
+                <line number="91" hits="1" branch="false" />
+                <line number="92" hits="1" branch="false" />
+                <line number="93" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddOneItemToThirdBag" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="97" hits="1" branch="false" />
+                <line number="98" hits="1" branch="false" />
+                <line number="99" hits="1" branch="false" />
+                <line number="100" hits="1" branch="false" />
+                <line number="101" hits="1" branch="false" />
+                <line number="102" hits="1" branch="false" />
+                <line number="103" hits="1" branch="false" />
+                <line number="104" hits="1" branch="false" />
+                <line number="105" hits="1" branch="false" />
+                <line number="106" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="AddItems" signature="(...)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="111" hits="8" branch="false" />
+                <line number="112" hits="180" branch="true" condition-coverage="100% (2/2)" />
+                <line number="113" hits="78" branch="false" />
+                <line number="114" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="AssertBackpackItems" signature="(...)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="117" hits="8" branch="false" />
+                <line number="118" hits="8" branch="false" />
+                <line number="119" hits="8" branch="false" />
+                <line number="121" hits="169" branch="true" condition-coverage="100% (2/2)" />
+                <line number="122" hits="51" branch="false" />
+                <line number="123" hits="51" branch="false" />
+                <line number="124" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="AssertBagItems" signature="(...)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="127" hits="9" branch="false" />
+                <line number="128" hits="9" branch="false" />
+                <line number="129" hits="9" branch="false" />
+                <line number="131" hits="99" branch="true" condition-coverage="100% (2/2)" />
+                <line number="132" hits="27" branch="false" />
+                <line number="133" hits="27" branch="false" />
+                <line number="134" hits="9" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="12" branch="false" />
+                <line number="10" hits="12" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="12" branch="false" />
+            <line number="10" hits="12" branch="false" />
+            <line number="14" hits="1" branch="false" />
+            <line number="18" hits="1" branch="false" />
+            <line number="19" hits="1" branch="false" />
+            <line number="20" hits="1" branch="false" />
+            <line number="21" hits="1" branch="false" />
+            <line number="22" hits="1" branch="false" />
+            <line number="23" hits="1" branch="false" />
+            <line number="27" hits="1" branch="false" />
+            <line number="31" hits="1" branch="false" />
+            <line number="32" hits="1" branch="false" />
+            <line number="33" hits="1" branch="false" />
+            <line number="34" hits="1" branch="false" />
+            <line number="38" hits="1" branch="false" />
+            <line number="39" hits="1" branch="false" />
+            <line number="40" hits="1" branch="false" />
+            <line number="41" hits="1" branch="false" />
+            <line number="45" hits="1" branch="false" />
+            <line number="46" hits="1" branch="false" />
+            <line number="47" hits="1" branch="false" />
+            <line number="48" hits="1" branch="false" />
+            <line number="52" hits="2" branch="false" />
+            <line number="57" hits="1" branch="false" />
+            <line number="58" hits="1" branch="false" />
+            <line number="59" hits="1" branch="false" />
+            <line number="60" hits="1" branch="false" />
+            <line number="61" hits="1" branch="false" />
+            <line number="62" hits="1" branch="false" />
+            <line number="66" hits="1" branch="false" />
+            <line number="67" hits="1" branch="false" />
+            <line number="68" hits="1" branch="false" />
+            <line number="69" hits="1" branch="false" />
+            <line number="70" hits="1" branch="false" />
+            <line number="71" hits="1" branch="false" />
+            <line number="75" hits="1" branch="false" />
+            <line number="76" hits="1" branch="false" />
+            <line number="77" hits="1" branch="false" />
+            <line number="78" hits="1" branch="false" />
+            <line number="79" hits="1" branch="false" />
+            <line number="80" hits="1" branch="false" />
+            <line number="81" hits="1" branch="false" />
+            <line number="82" hits="1" branch="false" />
+            <line number="86" hits="1" branch="false" />
+            <line number="87" hits="1" branch="false" />
+            <line number="88" hits="1" branch="false" />
+            <line number="89" hits="1" branch="false" />
+            <line number="90" hits="1" branch="false" />
+            <line number="91" hits="1" branch="false" />
+            <line number="92" hits="1" branch="false" />
+            <line number="93" hits="1" branch="false" />
+            <line number="97" hits="1" branch="false" />
+            <line number="98" hits="1" branch="false" />
+            <line number="99" hits="1" branch="false" />
+            <line number="100" hits="1" branch="false" />
+            <line number="101" hits="1" branch="false" />
+            <line number="102" hits="1" branch="false" />
+            <line number="103" hits="1" branch="false" />
+            <line number="104" hits="1" branch="false" />
+            <line number="105" hits="1" branch="false" />
+            <line number="106" hits="1" branch="false" />
+            <line number="111" hits="8" branch="false" />
+            <line number="112" hits="180" branch="true" condition-coverage="100% (2/2)" />
+            <line number="113" hits="78" branch="false" />
+            <line number="114" hits="8" branch="false" />
+            <line number="117" hits="8" branch="false" />
+            <line number="118" hits="8" branch="false" />
+            <line number="119" hits="8" branch="false" />
+            <line number="121" hits="169" branch="true" condition-coverage="100% (2/2)" />
+            <line number="122" hits="51" branch="false" />
+            <line number="123" hits="51" branch="false" />
+            <line number="124" hits="8" branch="false" />
+            <line number="127" hits="9" branch="false" />
+            <line number="128" hits="9" branch="false" />
+            <line number="129" hits="9" branch="false" />
+            <line number="131" hits="99" branch="true" condition-coverage="100% (2/2)" />
+            <line number="132" hits="27" branch="false" />
+            <line number="133" hits="27" branch="false" />
+            <line number="134" hits="9" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
