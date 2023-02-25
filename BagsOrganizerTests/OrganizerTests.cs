@@ -4,7 +4,7 @@ namespace BagsOrganizerTests;
 
 public class OrganizerTests
 {
-    private Organizer organizer;
+    private readonly Organizer organizer;
 
     public OrganizerTests()
         => organizer = new();
@@ -63,6 +63,16 @@ public class OrganizerTests
         AssertBagItems(2, "Mace", "Rose", "Linen", "Axe");
         AssertBagItems(3, "Silk", "Silk", "Silk", "Iron");
     }
+
+    [Fact]
+    public void AddTooManyItems()
+        => Assert.Throws<InvalidOperationException>(
+            () => AddItems("Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe",
+            "Axe", "Axe", "Axe", "Axe",
+            "Axe", "Axe", "Axe", "Axe",
+            "Axe", "Axe", "Axe", "Axe",
+            "Axe", "Axe", "Axe", "Axe",
+            "Axe"));
 
     [Fact]
     public void SetAllBagCategories()
@@ -152,6 +162,36 @@ public class OrganizerTests
         AssertBackpackItems();
         AssertBagItems(0, "Leather", "Leather", "Linen", "Linen");
         AssertBagItems(1, "Silk", "Silk");
+    }
+
+    [Fact]
+    public void Organize_BagWithCategoryCannotStoreAllItems()
+    {
+        AddItems("Leather", "Leather", "Linen", "Linen", "Silk", "Silk");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+
+        organizer.Organize();
+
+        AssertBackpackItems("Silk", "Silk");
+        AssertBagItems(0, "Leather", "Leather", "Linen", "Linen");
+    }
+
+    [Fact]
+    public void Organize_ManyItemsWithSeveralCategories()
+    {
+        AddItems("Leather", "Leather", "Linen", "Linen", "Silk", "Silk",
+            "Cherry Blossom", "Cherry Blossom", "Marigold", "Marigold", "Rose",
+            "Copper", "Copper", "Gold", "Gold", "Iron",
+            "Axe", "Axe");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Herbs);
+
+        organizer.Organize();
+
+        AssertBackpackItems("Silk", "Silk", "Rose", "Copper", "Copper", "Gold", "Gold", "Iron");
+        AssertBagItems(0, "Leather", "Leather", "Linen", "Linen");
+        AssertBagItems(1, "Cherry Blossom", "Cherry Blossom", "Marigold", "Marigold");
+        AssertBagItems(2, "Axe", "Axe");
     }
 
     private void AddItems(params string[] items)

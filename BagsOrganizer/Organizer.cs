@@ -62,7 +62,7 @@ public class Organizer
     public void Organize()
     {
         List<Item> allItems = backpackAndBags.SelectMany(b => b.Items).ToList();
-        backpackAndBags[0].Items.Clear();
+        ClearBagItems();
 
         foreach (Item item in allItems) {
             Bag? matchingFreeBag = bags.FirstOrDefault(b => b.Category.Equals(item.Category) && b.HasFreeSpace());
@@ -72,5 +72,11 @@ public class Organizer
             else
                 backpackAndBags.First(b => b.HasFreeSpace()).AddItem(item);
         }
+    }
+
+    private void ClearBagItems()
+    {
+        foreach (Bag bag in backpackAndBags)
+            bag.ClearItems();
     }
 }

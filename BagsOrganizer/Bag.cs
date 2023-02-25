@@ -2,15 +2,18 @@
 
 internal class Bag
 {
-    public List<Item> Items { get; }
-    public Category? Category { get; internal set; }
+    internal List<Item> Items { get; }
+    internal Category? Category { get; set; }
 
-    public Bag(int capacity)
+    internal Bag(int capacity)
         => Items = new(capacity);
 
-    public void AddItem(Item item)
+    internal void AddItem(Item item)
         => Items.Add(item);
 
     internal bool HasFreeSpace()
         => Items.Count < Items.Capacity;
+
+    internal void ClearItems()
+        => Items.Clear();
 }
