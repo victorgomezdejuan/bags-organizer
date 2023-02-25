@@ -14,7 +14,7 @@ public class OrganizerTests
         => Assert.Empty(organizer.GetBackpackItems());
 
     [Fact]
-    public void AddWrongItem()
+    public void AddInvalidItem()
         => Assert.Throws<NonExistingItemException>(
             () => organizer.AddItem(new Item(Category.Clothes, "Seaweed")));
 
@@ -65,7 +65,7 @@ public class OrganizerTests
     }
 
     [Fact]
-    public void SetBagCategories()
+    public void SetAllBagCategories()
     {
         organizer.SetCategoryOfBag(0, Category.Clothes);
         organizer.SetCategoryOfBag(1, Category.Metals);
@@ -76,6 +76,18 @@ public class OrganizerTests
         Assert.Equal(Category.Metals, organizer.GetCategoryOfBag(1));
         Assert.Equal(Category.Weapons, organizer.GetCategoryOfBag(2));
         Assert.Equal(Category.Herbs, organizer.GetCategoryOfBag(3));
+    }
+
+    [Fact]
+    public void SetTwoBagCategories()
+    {
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Metals);
+
+        Assert.Equal(Category.Clothes, organizer.GetCategoryOfBag(0));
+        Assert.Equal(Category.Metals, organizer.GetCategoryOfBag(1));
+        Assert.Null(organizer.GetCategoryOfBag(2));
+        Assert.Null(organizer.GetCategoryOfBag(3));
     }
 
     [Fact]
@@ -108,6 +120,38 @@ public class OrganizerTests
         AssertBackpackItems("Copper", "Gold", "Axe", "Dagger");
         AssertBagItems(0, "Leather", "Linen");
         AssertBagItems(1, "Cherry Blossom", "Marigold");
+        AssertBagItems(2);
+        AssertBagItems(3);
+    }
+
+    [Fact]
+    public void Organize_NoItemMatchABagCategory()
+    {
+        AddItems("Copper", "Gold", "Axe", "Dagger");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Herbs);
+
+        organizer.Organize();
+
+        AssertBackpackItems("Copper", "Gold", "Axe", "Dagger");
+        AssertBagItems(0);
+        AssertBagItems(1);
+        AssertBagItems(2);
+        AssertBagItems(3);
+    }
+
+    [Fact]
+    public void Organize_TwoBagsWithSameCategory()
+    {
+        AddItems("Leather", "Leather", "Linen", "Linen", "Silk", "Silk");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Clothes);
+
+        organizer.Organize();
+
+        AssertBackpackItems();
+        AssertBagItems(0, "Leather", "Leather", "Linen", "Linen");
+        AssertBagItems(1, "Silk", "Silk");
     }
 
     private void AddItems(params string[] items)
@@ -117,7 +161,7 @@ public class OrganizerTests
     }
 
     private static Item ItemFromName(string item)
-        => Organizer.AllItems.Single(i => i.Name.Equals(item));
+        => Organizer.PossibleItems.Single(i => i.Name.Equals(item));
 
     private void AssertBackpackItems(params string[] items)
     {

@@ -2,7 +2,7 @@
 
 public class Organizer
 {
-    public static readonly List<Item> AllItems = new() {
+    public static readonly List<Item> PossibleItems = new() {
         new(Category.Clothes, "Leather"),
         new(Category.Clothes, "Linen"),
         new(Category.Clothes, "Silk"),
@@ -39,20 +39,12 @@ public class Organizer
         backpackAndBags.AddRange(bags);
     }
 
-    public static Item[] GetItemsOfCategory(Category category)
-        => AllItems.Where(i => i.Category.Equals(category)).ToArray();
-
     public void AddItem(Item item)
     {
-        if (!AllItems.Contains(item))
+        if (!PossibleItems.Contains(item))
             throw new NonExistingItemException();
 
-        foreach(Bag bag in backpackAndBags) {
-            if(bag.HasFreeSpace()) {
-                bag.AddItem(item);
-                break;
-            }
-        }
+        backpackAndBags.First(b => b.HasFreeSpace()).AddItem(item);
     }
 
     public Item[] GetBackpackItems()
@@ -62,9 +54,7 @@ public class Organizer
         => bags[bagIndex].Items.ToArray();
 
     public void SetCategoryOfBag(int bagIndex, Category category)
-    {
-        bags[bagIndex].Category = category;
-    }
+        => bags[bagIndex].Category = category;
 
     public Category? GetCategoryOfBag(int bagIndex)
         => bags[bagIndex].Category;
@@ -75,18 +65,12 @@ public class Organizer
         backpackAndBags[0].Items.Clear();
 
         foreach (Item item in allItems) {
-            bool addedToCategoryBag = false;
+            Bag? matchingFreeBag = bags.FirstOrDefault(b => b.Category.Equals(item.Category) && b.HasFreeSpace());
 
-            foreach (Bag bag in bags) {
-                if (bag.Category is not null && bag.Category.Equals(item.Category)) {
-                    bag.AddItem(item);
-                    addedToCategoryBag = true;
-                    break;
-                }
-            }
-
-            if (!addedToCategoryBag)
-                backpackAndBags[0].AddItem(item);
+            if (matchingFreeBag is not null)
+                matchingFreeBag.AddItem(item);
+            else
+                backpackAndBags.First(b => b.HasFreeSpace()).AddItem(item);
         }
     }
 }
