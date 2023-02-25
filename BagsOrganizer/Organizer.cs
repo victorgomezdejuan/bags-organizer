@@ -2,49 +2,91 @@
 
 public class Organizer
 {
-    private static readonly Dictionary<string, string[]> Items = new() {
-        ["clothes"] = new string[] { "Leather", "Linen", "Silk", "Wool" },
-        ["herbs"] = new string[] { "Cherry Blossom", "Marigold", "Rose", "Seaweed" },
-        ["metals"] = new string[] { "Copper", "Gold", "Iron", "Silver" },
-        ["weapons"] = new string[] { "Axe", "Dagger", "Mace", "Sword" }
+    public static readonly List<Item> AllItems = new() {
+        new(Category.Clothes, "Leather"),
+        new(Category.Clothes, "Linen"),
+        new(Category.Clothes, "Silk"),
+        new(Category.Clothes, "Wool"),
+        new(Category.Herbs, "Cherry Blossom"),
+        new(Category.Herbs, "Marigold"),
+        new(Category.Herbs, "Rose"),
+        new(Category.Herbs, "Seaweed"),
+        new(Category.Metals, "Copper"),
+        new(Category.Metals, "Gold"),
+        new(Category.Metals, "Iron"),
+        new(Category.Metals, "Silver"),
+        new(Category.Weapons, "Axe"),
+        new(Category.Weapons, "Dagger"),
+        new(Category.Weapons, "Mace"),
+        new(Category.Weapons, "Sword"),
     };
-
-    private List<Bag> bags;
+    private readonly Bag backpack;
+    private readonly List<Bag> bags;
+    private readonly List<Bag> backpackAndBags;
 
     public Organizer()
     {
+        backpack = new Bag(8);
         bags = new() {
-            new Bag(8), // backpack
             new Bag(4),
             new Bag(4),
             new Bag(4),
             new Bag(4)
         };
+        backpackAndBags = new List<Bag> {
+            backpack
+        };
+        backpackAndBags.AddRange(bags);
     }
 
-    public static string[] GetCategories()
-        => Items.Keys.ToArray();
+    public static Item[] GetItemsOfCategory(Category category)
+        => AllItems.Where(i => i.Category.Equals(category)).ToArray();
 
-    public static string[] GetItemsOfCategory(string category)
-        => Items[category];
-
-    public void AddItem(string item)
+    public void AddItem(Item item)
     {
-        if (!Items.SelectMany(c => c.Value).Contains(item))
+        if (!AllItems.Contains(item))
             throw new NonExistingItemException();
 
-        foreach(Bag bag in bags) {
+        foreach(Bag bag in backpackAndBags) {
             if(bag.HasFreeSpace()) {
                 bag.AddItem(item);
                 break;
             }
-                
         }
     }
 
-    public string[] GetBackpackItems()
-        => bags[0].Items.ToArray();
+    public Item[] GetBackpackItems()
+        => backpack.Items.ToArray();
 
-    public string[] GetItemsOfBag(int bagIndex)
-        => bags[bagIndex + 1].Items.ToArray();
+    public Item[] GetItemsOfBag(int bagIndex)
+        => bags[bagIndex].Items.ToArray();
+
+    public void SetCategoryOfBag(int bagIndex, Category category)
+    {
+        bags[bagIndex].Category = category;
+    }
+
+    public Category? GetCategoryOfBag(int bagIndex)
+        => bags[bagIndex].Category;
+
+    public void Organize()
+    {
+        List<Item> allItems = backpackAndBags.SelectMany(b => b.Items).ToList();
+        backpackAndBags[0].Items.Clear();
+
+        foreach (Item item in allItems) {
+            bool addedToCategoryBag = false;
+
+            foreach (Bag bag in bags) {
+                if (bag.Category is not null && bag.Category.Equals(item.Category)) {
+                    bag.AddItem(item);
+                    addedToCategoryBag = true;
+                    break;
+                }
+            }
+
+            if (!addedToCategoryBag)
+                backpackAndBags[0].AddItem(item);
+        }
+    }
 }

@@ -1,6 +1,3 @@
 ﻿namespace BagsOrganizer;
 
-public class NonExistingItemException : Exception
-{
-
-}
+public class NonExistingItemException : Exception { }

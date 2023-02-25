@@ -10,21 +10,13 @@ public class OrganizerTests
         => organizer = new();
 
     [Fact]
-    public void Categories()
-        => Assert.Equal(new string[] { "clothes", "herbs", "metals", "weapons" }, Organizer.GetCategories());
-
-    [Fact]
-    public void CategoryItems()
-    {
-        Assert.Equal(new string[] { "Leather", "Linen", "Silk", "Wool" }, Organizer.GetItemsOfCategory("clothes"));
-        Assert.Equal(new string[] { "Cherry Blossom", "Marigold", "Rose", "Seaweed" }, Organizer.GetItemsOfCategory("herbs"));
-        Assert.Equal(new string[] { "Copper", "Gold", "Iron", "Silver" }, Organizer.GetItemsOfCategory("metals"));
-        Assert.Equal(new string[] { "Axe", "Dagger", "Mace", "Sword" }, Organizer.GetItemsOfCategory("weapons"));
-    }
-
-    [Fact]
     public void EmptyBackPack()
         => Assert.Empty(organizer.GetBackpackItems());
+
+    [Fact]
+    public void AddWrongItem()
+        => Assert.Throws<NonExistingItemException>(
+            () => organizer.AddItem(new Item(Category.Clothes, "Seaweed")));
 
     [Fact]
     public void AddOneItemToBackpack()
@@ -47,13 +39,9 @@ public class OrganizerTests
         AssertBackpackItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper");
     }
 
-    [Fact]
-    public void AddWrongItem()
-        => Assert.Throws<NonExistingItemException>(() => organizer.AddItem("NonExisting"));
-
 
     [Fact]
-    public void AddOneItemToFirsttBag()
+    public void AddOneItemToFirstBag()
     {
         AddItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper",
             "Gold");
@@ -62,74 +50,92 @@ public class OrganizerTests
     }
 
     [Fact]
-    public void FillUpFirstBag()
-    {
-        AddItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper",
-            "Gold", "Marigold", "Marigold", "Dagger");
-        AssertBackpackItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper");
-        AssertBagItems(0, "Gold", "Marigold", "Marigold", "Dagger");
-    }
-
-    [Fact]
-    public void AddOneItemToSecondBag()
-    {
-        AddItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper",
-            "Gold", "Marigold", "Marigold", "Dagger",
-            "Linen");
-        AssertBackpackItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper");
-        AssertBagItems(0, "Gold", "Marigold", "Marigold", "Dagger");
-        AssertBagItems(1, "Linen");
-    }
-
-    [Fact]
-    public void FillUpSecondBag()
-    {
-        AddItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper",
-            "Gold", "Marigold", "Marigold", "Dagger",
-            "Linen", "Rose", "Linen", "Rose");
-        AssertBackpackItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper");
-        AssertBagItems(0, "Gold", "Marigold", "Marigold", "Dagger");
-        AssertBagItems(1, "Linen", "Rose", "Linen", "Rose");
-    }
-
-    [Fact]
-    public void AddOneItemToThirdBag()
+    public void FillUpAllBags()
     {
         AddItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper",
             "Gold", "Marigold", "Marigold", "Dagger",
             "Linen", "Rose", "Linen", "Rose",
-            "Mace");
+            "Mace", "Rose", "Linen", "Axe",
+            "Silk", "Silk", "Silk", "Iron");
         AssertBackpackItems("Leather", "Axe", "Axe", "Axe", "Axe", "Axe", "Axe", "Copper");
         AssertBagItems(0, "Gold", "Marigold", "Marigold", "Dagger");
         AssertBagItems(1, "Linen", "Rose", "Linen", "Rose");
-        AssertBagItems(2, "Mace");
+        AssertBagItems(2, "Mace", "Rose", "Linen", "Axe");
+        AssertBagItems(3, "Silk", "Silk", "Silk", "Iron");
     }
 
-    // Arreglar este test y mirar si se puede generalizar el caso de extra bags para no dejarlo preparado sólo para 4
+    [Fact]
+    public void SetBagCategories()
+    {
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Metals);
+        organizer.SetCategoryOfBag(2, Category.Weapons);
+        organizer.SetCategoryOfBag(3, Category.Herbs);
+
+        Assert.Equal(Category.Clothes, organizer.GetCategoryOfBag(0));
+        Assert.Equal(Category.Metals, organizer.GetCategoryOfBag(1));
+        Assert.Equal(Category.Weapons, organizer.GetCategoryOfBag(2));
+        Assert.Equal(Category.Herbs, organizer.GetCategoryOfBag(3));
+    }
+
+    [Fact]
+    public void Organize_AllItemsMatchABagCategory()
+    {
+        AddItems("Leather", "Linen", "Cherry Blossom", "Marigold", "Copper", "Gold", "Axe", "Dagger");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Herbs);
+        organizer.SetCategoryOfBag(2, Category.Metals);
+        organizer.SetCategoryOfBag(3, Category.Weapons);
+
+        organizer.Organize();
+
+        AssertBackpackItems();
+        AssertBagItems(0, "Leather", "Linen");
+        AssertBagItems(1, "Cherry Blossom", "Marigold");
+        AssertBagItems(2, "Copper", "Gold");
+        AssertBagItems(3, "Axe", "Dagger");
+    }
+
+    [Fact]
+    public void Organize_NotAllItemsMatchABagCategory()
+    {
+        AddItems("Leather", "Linen", "Cherry Blossom", "Marigold", "Copper", "Gold", "Axe", "Dagger");
+        organizer.SetCategoryOfBag(0, Category.Clothes);
+        organizer.SetCategoryOfBag(1, Category.Herbs);
+
+        organizer.Organize();
+
+        AssertBackpackItems("Copper", "Gold", "Axe", "Dagger");
+        AssertBagItems(0, "Leather", "Linen");
+        AssertBagItems(1, "Cherry Blossom", "Marigold");
+    }
 
     private void AddItems(params string[] items)
     {
-        foreach(string item in items)
-            organizer.AddItem(item);
+        foreach (string item in items)
+            organizer.AddItem(ItemFromName(item));
     }
+
+    private static Item ItemFromName(string item)
+        => Organizer.AllItems.Single(i => i.Name.Equals(item));
 
     private void AssertBackpackItems(params string[] items)
     {
-        string[] backpackItems = organizer.GetBackpackItems();
+        Item[] backpackItems = organizer.GetBackpackItems();
         Assert.Equal(items.Length, backpackItems.Length);
 
         for (int i = 0; i < items.Length; i++) {
-            Assert.Equal(items[i], backpackItems[i]);
+            Assert.Equal(ItemFromName(items[i]), backpackItems[i]);
         }
     }
 
     private void AssertBagItems(int bagIndex, params string[] items)
     {
-        string[] bagItems = organizer.GetItemsOfBag(bagIndex);
+        Item[] bagItems = organizer.GetItemsOfBag(bagIndex);
         Assert.Equal(items.Length, bagItems.Length);
 
         for (int i = 0; i < items.Length; i++) {
-            Assert.Equal(items[i], bagItems[i]);
+            Assert.Equal(ItemFromName(items[i]), bagItems[i]);
         }
     }
 }
